@@ -13,10 +13,19 @@ class ShoppingCart
   end
 
   def show_items
-    puts "The items available in the shop are:"
+    puts "The items added in your cart are:"
     puts items_name
   end
 
+  def checkout
+    @total_price = 0
+    #Add each item price to our total
+    @items.each do |item|
+    @total_price += item.price
+    end
+    #return  our total price to whoever called for it
+    @total_price
+  end
 
 end
 
@@ -59,25 +68,8 @@ class Fruit < Item
   end
 end
 
-class Juice < Item
-  def price
-      @price
-  end
-end
 
-class Cereal < Item
-  def price
-      @price
-  end
-end
-
-class Canned < Item
-  def price
-      @price
-  end
-end
-
-#Check if today is weekend
+#Check if today is weekend with this method
 
 def weekend_checker
   time = Time.now
@@ -100,10 +92,10 @@ end
 Shopping_Cart = ShoppingCart.new
 
 banana = Fruit.new("Banana", 10)
-orange_juice = Juice.new("Orange juice", 10)
-Rice = Cereal.new("Rice", 1)
+orange_juice = Item.new("Orange juice", 10)
+Rice = Item.new("Rice", 1)
 vacuum_cleaner = Houseware.new("Vacuum cleaner", 150)
-anchovies = Canned.new("Anchovies", 2)
+anchovies = Item.new("Anchovies", 2)
 
 Shopping_Cart.add_item(banana)
 Shopping_Cart.add_item(orange_juice)
@@ -113,5 +105,11 @@ Shopping_Cart.add_item(anchovies)
 
 #Shopping_Cart.show_items
 
-puts banana.price
-puts vacuum_cleaner.price
+#puts banana.price
+#puts vacuum_cleaner.price
+
+joshs_cart = ShoppingCart.new
+joshs_cart.add_item(orange_juice)
+joshs_cart.add_item(Rice)
+joshs_cart.show_items
+puts ("Your total today is $#{joshs_cart.checkout}. Have a nice day!")
