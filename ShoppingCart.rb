@@ -23,8 +23,15 @@ class ShoppingCart
     @items.each do |item|
     @total_price += item.price
     end
+
+    if items.count > 5
+      @total_price = @total_price * 0.9
+      puts "Discount of 5+ items applied"
+    else
+      puts "You added #{items.count} items to your cart, there is a 10% discount for more than 5 items.\n Do you want more items?"
+    end
     #return  our total price to whoever called for it
-    @total_price
+    @total_price.round(2)
   end
 
 end
@@ -51,6 +58,7 @@ class Houseware < Item
         puts "price not enough for discount on houseware items"
         @price
       end
+      @price
   end
 end
 
@@ -65,6 +73,7 @@ class Fruit < Item
         puts "discount not available today for fruit"
         @price
       end
+      @price
   end
 end
 
@@ -96,17 +105,26 @@ orange_juice = Item.new("Orange juice", 10)
 Rice = Item.new("Rice", 1)
 vacuum_cleaner = Houseware.new("Vacuum cleaner", 150)
 anchovies = Item.new("Anchovies", 2)
+iphone6s = Item.new("Iphone 6s", 859)
+
 
 Shopping_Cart.add_item(banana)
 Shopping_Cart.add_item(orange_juice)
 Shopping_Cart.add_item(Rice)
 Shopping_Cart.add_item(vacuum_cleaner)
 Shopping_Cart.add_item(anchovies)
+Shopping_Cart.add_item(iphone6s)
+
+
 
 #Shopping_Cart.show_items
 
+puts ("Your total today is $#{Shopping_Cart.checkout}. Have a nice day!")
+
+
 #puts banana.price
 #puts vacuum_cleaner.price
+
 
 joshs_cart = ShoppingCart.new
 joshs_cart.add_item(orange_juice)
